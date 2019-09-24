@@ -1,6 +1,5 @@
 package io.devfactory.repository;
 
-import io.devfactory.domain.Point;
 import io.devfactory.domain.PointRedis;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
