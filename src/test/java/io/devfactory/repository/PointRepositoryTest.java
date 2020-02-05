@@ -1,25 +1,24 @@
 package io.devfactory.repository;
 
-import io.devfactory.domain.Point;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import io.devfactory.client.Point;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
 @DataJpaTest
-public class PointRepositoryTest {
+class PointRepositoryTest {
 
     @Autowired
     private PointRepository pointRepository;
 
+    @DisplayName("등록 및 조회를 할 수 있다")
     @Test
-    public void 등록_및_조회를_할_수_있다() {
+    void 등록_및_조회를_할_수_있다() {
         // given
         Point savedPoint = pointRepository.save(new Point(1000L, LocalDateTime.of(2019, 9, 24, 20, 0)));
 

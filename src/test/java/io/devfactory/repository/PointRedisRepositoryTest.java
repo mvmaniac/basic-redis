@@ -1,25 +1,23 @@
 package io.devfactory.repository;
 
-import io.devfactory.domain.PointRedis;
+import io.devfactory.client.PointRedis;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.junit.After;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
-@RunWith(SpringRunner.class)
 @SpringBootTest
-public class PointRedisRepositoryTest {
+class PointRedisRepositoryTest {
 
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
@@ -27,13 +25,14 @@ public class PointRedisRepositoryTest {
     @Autowired
     private PointRedisRepository pointRedisRepository;
 
-    @After
-    public void tearDown() {
+    @AfterEach
+    void tearDown() {
         pointRedisRepository.deleteAll();
     }
 
+    @DisplayName("직접 등록 및 조회를 할 수 있다")
     @Test
-    public void 직접_등록_및_조회를_할_수_있다() {
+    void 직접_등록_및_조회를_할_수_있다() {
         String key = "random";
         String value = RandomStringUtils.randomAlphabetic(5, 10);
 
@@ -46,8 +45,9 @@ public class PointRedisRepositoryTest {
         assertThat(getValue).isEqualTo(value);
     }
 
+    @DisplayName("등록 및 조회를 할 수 있다")
     @Test
-    public void 등록_및_조회를_할_수_있다() {
+    void 등록_및_조회를_할_수_있다() {
         // given
         PointRedis savedPointRedis = pointRedisRepository.save(new PointRedis(1000L, LocalDateTime.of(2019, 9, 24, 20, 0)));
 

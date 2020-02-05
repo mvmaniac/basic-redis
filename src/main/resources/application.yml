@@ -1,7 +1,7 @@
 spring:
   redis:
-    host: 192.168.0.26
-    port: 6379
+    host: 192.168.0.24
+    port: 8379
     lettuce:
       pool:
         max-active: 10

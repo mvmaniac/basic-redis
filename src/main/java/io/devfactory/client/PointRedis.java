@@ -1,19 +1,21 @@
-package io.devfactory.domain;
+package io.devfactory.client;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.redis.core.RedisHash;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Getter
-@Entity
-public class Point {
+@RedisHash("point")
+public class PointRedis {
 
+    // 만약 id 변수명을 redisId 로 한다고 하면
+    // javax.persistence.Id 가 아니라 org.springframework.data.annotation.Id로 지정해야 함
     @Id
     @GeneratedValue
     private Long id;
@@ -21,7 +23,7 @@ public class Point {
     private LocalDateTime refreshTime;
 
     @Builder
-    public Point(Long amount, LocalDateTime refreshTime) {
+    public PointRedis(Long amount, LocalDateTime refreshTime) {
         this.amount = amount;
         this.refreshTime = refreshTime;
     }

@@ -1,18 +1,18 @@
-package io.devfactory.domain;
+package io.devfactory.client;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.redis.core.RedisHash;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Getter
-@RedisHash("point")
-public class PointRedis {
+@Entity
+public class Point {
 
     @Id
     @GeneratedValue
@@ -21,7 +21,7 @@ public class PointRedis {
     private LocalDateTime refreshTime;
 
     @Builder
-    public PointRedis(Long amount, LocalDateTime refreshTime) {
+    public Point(Long amount, LocalDateTime refreshTime) {
         this.amount = amount;
         this.refreshTime = refreshTime;
     }
