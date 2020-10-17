@@ -14,18 +14,18 @@ import org.springframework.data.redis.repository.configuration.EnableRedisReposi
 @Configuration
 public class RedisRepositoryConfig {
 
-    private final RedisProperties redisProperties;
+  private final RedisProperties redisProperties;
 
-    @Bean
-    public RedisConnectionFactory redisConnectionFactory() {
-        return new LettuceConnectionFactory(redisProperties.getHost(), redisProperties.getPort());
-    }
+  @Bean
+  public RedisConnectionFactory redisConnectionFactory() {
+    return new LettuceConnectionFactory(redisProperties.getHost(), redisProperties.getPort());
+  }
 
-    @Bean
-    public RedisTemplate<byte[], byte[]> redisTemplate() {
-        RedisTemplate<byte[], byte[]> redisTemplate = new RedisTemplate<>();
-        redisTemplate.setConnectionFactory(redisConnectionFactory());
-        return redisTemplate;
-    }
+  @Bean
+  public RedisTemplate<byte[], byte[]> redisTemplate() {
+    RedisTemplate<byte[], byte[]> redisTemplate = new RedisTemplate<>();
+    redisTemplate.setConnectionFactory(redisConnectionFactory());
+    return redisTemplate;
+  }
 
 }
