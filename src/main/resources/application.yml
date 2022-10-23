@@ -1,6 +1,24 @@
 spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?useSSL=false&&allowMultiQueries=true&rewriteBatchedStatements=true
+    username: test
+    password: 1234
+    hikari:
+      maximum-pool-size: 50 # NamedLock 떄문에 설정
+
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: false
+        show_sql: false
+        use_sql_comments: false
+    hibernate:
+      ddl-auto: create
+
   redis:
-    host: 192.168.0.24
+    host: 192.168.0.91
     port: 8379
     lettuce:
       pool:
@@ -11,3 +29,5 @@ spring:
 logging:
   level:
     io.devfactory: debug
+    org.hibernate.SQL: debug
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
