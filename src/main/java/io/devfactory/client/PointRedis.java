@@ -1,8 +1,8 @@
 package io.devfactory.client;
 
 import java.time.LocalDateTime;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

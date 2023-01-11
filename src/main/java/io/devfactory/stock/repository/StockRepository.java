@@ -5,8 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 
-import static javax.persistence.LockModeType.OPTIMISTIC;
-import static javax.persistence.LockModeType.PESSIMISTIC_WRITE;
+import static jakarta.persistence.LockModeType.OPTIMISTIC;
+import static jakarta.persistence.LockModeType.PESSIMISTIC_WRITE;
 
 public interface StockRepository extends JpaRepository<Stock, Long> {
 
