@@ -1,0 +1,16 @@
+### 사용자 추가 (이미 등록된 userId가 있다면 덮어씀)
+POST http://localhost:8080/leaderboard/add
+Content-Type: application/json
+
+{
+  "userId": "test-1",
+  "score": "30"
+}
+
+### 사용자 순위 조회
+GET http://localhost:8080/leaderboard/rank/dummy-5
+Content-Type: application/json
+
+### 상위 순위 조회 (0부터 시작, top 3를 조회 할 경우 limit 값을 2로 주어야 함)
+GET http://localhost:8080/leaderboard/top-ranks/2
+Content-Type: application/json

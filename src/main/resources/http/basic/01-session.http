@@ -1,0 +1,23 @@
+### 8080 포트로 세션 로그인
+GET http://localhost:8080/login-user/session/login?name=user1
+Content-Type: application/json
+
+### 8080 포트로 세션 사용자 정보 요청
+GET http://localhost:8080/login-user/session/user
+Content-Type: application/json
+
+### 8081 포트로 세션 사용자 정보 요청
+GET http://localhost:8081/login-user/session/user
+Content-Type: application/json
+
+### 8080 포트로 레디스 로그인
+GET http://localhost:8080/login-user/redis/login?name=user1
+Content-Type: application/json
+
+### 8080 포트로 레디스 사용자 정보 요청
+GET http://localhost:8080/login-user/redis/user
+Content-Type: application/json
+
+### 8081 포트로 레디스 사용자 정보 요청
+GET http://localhost:8081/login-user/redis/user
+Content-Type: application/json

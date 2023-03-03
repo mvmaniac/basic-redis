@@ -1,0 +1,7 @@
+### A 사용자의 정보 요청
+GET http://localhost:8080/cache/users/A/profile
+Content-Type: application/json
+
+### B 사용자의 정보 요청
+GET http://localhost:8080/cache/users/B/profile
+Content-Type: application/json
