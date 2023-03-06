@@ -1,13 +1,13 @@
 plugins {
-  id 'org.springframework.boot' version '2.7.5'
-  id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+  id 'org.springframework.boot' version '3.1.0'
+  id 'io.spring.dependency-management' version '1.1.0'
   id 'java'
 }
 
 group = 'io.devfactory'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = JavaVersion.VERSION_18
-targetCompatibility = JavaVersion.VERSION_18
+sourceCompatibility = JavaVersion.VERSION_19
+targetCompatibility = JavaVersion.VERSION_19
 
 configurations {
   compileOnly {
@@ -23,11 +23,12 @@ dependencies {
   implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
   implementation 'org.springframework.boot:spring-boot-starter-data-redis'
   implementation 'org.springframework.boot:spring-boot-starter-web'
+  implementation 'org.springframework.session:spring-session-data-redis'
 
   implementation 'org.apache.commons:commons-lang3:3.12.0'
-  implementation 'org.redisson:redisson-spring-boot-starter:3.17.7'
+  implementation 'org.redisson:redisson-spring-boot-starter:3.20.0'
 
-  runtimeOnly 'mysql:mysql-connector-java'
+  runtimeOnly 'com.mysql:mysql-connector-j'
 
   developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
@@ -44,4 +45,8 @@ dependencies {
 
 tasks.named('test') {
   useJUnitPlatform()
+}
+
+tasks.named('compileJava') {
+  inputs.files(tasks.named('processResources'))
 }
