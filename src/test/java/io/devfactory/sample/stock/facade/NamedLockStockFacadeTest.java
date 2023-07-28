@@ -1,7 +1,6 @@
 package io.devfactory.sample.stock.facade;
 
 import io.devfactory.sample.stock.domain.Stock;
-import io.devfactory.sample.stock.facade.NamedLockStockFacade;
 import io.devfactory.sample.stock.repository.StockRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,18 +38,21 @@ class NamedLockStockFacadeTest {
   @Test
   void stock_decrease_multiple_named_lock() throws Exception {
     int threadCount = 100;
+    
+    CountDownLatch countDownLatch;
 
-    final var executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
-    final var countDownLatch = new CountDownLatch(threadCount);
+    try (var executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors())) {
+      countDownLatch = new CountDownLatch(threadCount);
 
-    for (int i = 0; i < threadCount; i += 1) {
-      executorService.submit(() -> {
-        try {
-          namedLockStockFacade.decrease(1L, 1L);
-        } finally {
-          countDownLatch.countDown();
-        }
-      });
+      for (int i = 0; i < threadCount; i += 1) {
+        executorService.submit(() -> {
+          try {
+            namedLockStockFacade.decrease(1L, 1L);
+          } finally {
+            countDownLatch.countDown();
+          }
+        });
+      }
     }
 
     countDownLatch.await();

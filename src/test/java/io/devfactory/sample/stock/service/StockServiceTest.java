@@ -2,7 +2,6 @@ package io.devfactory.sample.stock.service;
 
 import io.devfactory.sample.stock.domain.Stock;
 import io.devfactory.sample.stock.repository.StockRepository;
-import io.devfactory.sample.stock.service.StockService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -49,17 +48,20 @@ class StockServiceTest {
   void stock_decrease_multiple_error() throws Exception {
     int threadCount = 100;
 
-    final var executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
-    final var countDownLatch = new CountDownLatch(threadCount);
+    CountDownLatch countDownLatch;
 
-    for (int i = 0; i < threadCount; i += 1) {
-      executorService.submit(() -> {
-        try {
-          stockService.decrease(1L, 1L);
-        } finally {
-          countDownLatch.countDown();
-        }
-      });
+    try (var executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors())) {
+      countDownLatch = new CountDownLatch(threadCount);
+
+      for (int i = 0; i < threadCount; i += 1) {
+        executorService.submit(() -> {
+          try {
+            stockService.decrease(1L, 1L);
+          } finally {
+            countDownLatch.countDown();
+          }
+        });
+      }
     }
 
     countDownLatch.await();

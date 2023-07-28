@@ -39,17 +39,20 @@ class RedissonLockStockFacadeTest {
   void stock_decrease_multiple_redisson_lock() throws Exception {
     int threadCount = 100;
 
-    final var executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
-    final var countDownLatch = new CountDownLatch(threadCount);
+    CountDownLatch countDownLatch;
 
-    for (int i = 0; i < threadCount; i += 1) {
-      executorService.submit(() -> {
-        try {
-          redissonLockStockFacade.decrease(1L, 1L);
-        } finally {
-          countDownLatch.countDown();
-        }
-      });
+    try (var executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors())) {
+      countDownLatch = new CountDownLatch(threadCount);
+
+      for (int i = 0; i < threadCount; i += 1) {
+        executorService.submit(() -> {
+          try {
+            redissonLockStockFacade.decrease(1L, 1L);
+          } finally {
+            countDownLatch.countDown();
+          }
+        });
+      }
     }
 
     countDownLatch.await();
