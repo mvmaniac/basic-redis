@@ -1,0 +1,76 @@
+### 캐시 조회 (String)
+GET http://localhost:8080/book/cache/20/string
+Content-Type: application/json
+
+### 캐시 조회 (JSON)
+GET http://localhost:8080/book/cache/25/json
+Content-Type: application/json
+
+### 캐시 등록 안됨
+POST http://localhost:8080/book/cache/string
+Content-Type: application/json
+
+{
+  "id": 10,
+  "name": "테스트99",
+  "address": "서울 마포구",
+  "date": "1986-01-15T23:38:20.268972"
+}
+
+### 캐시 등록 (String)
+POST http://localhost:8080/book/cache/string
+Content-Type: application/json
+
+{
+  "id": 20,
+  "name": "테스트99",
+  "address": "서울 마포구 마포대로99길",
+  "date": "1986-01-15T23:38:20.268972"
+}
+
+### 캐시 수정 (String)
+POST http://localhost:8080/book/cache/string
+Content-Type: application/json
+
+{
+  "id": 20,
+  "name": "테스트99",
+  "address": "서울 마포구 마포대로99길 수정",
+  "date": "1986-01-25T23:38:20.268972"
+}
+
+### 캐시 등록 (JSON)
+POST http://localhost:8080/book/cache/json
+Content-Type: application/json
+
+{
+  "id": 25,
+  "name": "테스트99 JSON",
+  "address": "서울 마포구 마포대로99길",
+  "date": "1986-01-15T23:38:20.268972"
+}
+
+### 캐시 수정 (JSON)
+POST http://localhost:8080/book/cache/json
+Content-Type: application/json
+
+{
+  "id": 25,
+  "name": "테스트99 JSON",
+  "address": "서울 마포구 마포대로99길 수정",
+  "date": "1986-01-25T23:38:20.268972"
+}
+
+### 캐시 삭제
+DELETE http://localhost:8080/book/cache/20
+Content-Type: application/json
+
+### 캐시 조회 및 등록 (최초 등록 후 캐시 조회)
+POST http://localhost:8080/book/cache
+Content-Type: application/json
+
+{
+  "id": 100,
+  "name": "테스트100",
+  "address": "서울 마포구 마포대로100길"
+}
