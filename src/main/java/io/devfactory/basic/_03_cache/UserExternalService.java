@@ -1,5 +1,6 @@
 package io.devfactory.basic._03_cache;
 
+import io.devfactory.config.RedisCacheKey;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class UserExternalService {
     return "";
   }
 
-  @Cacheable(cacheNames = "user-age", key = "#userId")
+  @Cacheable(cacheNames = RedisCacheKey.USER_AGE, key = "#userId")
   public int getUserAge(String userId) {
     // 외부 서비스나 DB 호출 한다고 가정
     sleep();

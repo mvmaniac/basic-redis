@@ -1,4 +1,4 @@
-package io.devfactory.basic._05_pub_sub;
+package io.devfactory.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

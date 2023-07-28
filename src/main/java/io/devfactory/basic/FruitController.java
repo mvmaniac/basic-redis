@@ -12,22 +12,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class FruitController {
 
-  private final StringRedisTemplate redisTemplate;
+  private final StringRedisTemplate stringRedisTemplate;
 
-  public FruitController(StringRedisTemplate redisTemplate) {
-    this.redisTemplate = redisTemplate;
+  public FruitController(StringRedisTemplate stringRedisTemplate) {
+    this.stringRedisTemplate = stringRedisTemplate;
   }
 
   @GetMapping("/set")
   public String setFruit(@RequestParam String name) {
-    final var operations = redisTemplate.opsForValue();
+    final var operations = stringRedisTemplate.opsForValue();
     operations.set("fruit", name);
     return "saved";
   }
 
   @GetMapping("/get")
   public String getFruit() {
-    return redisTemplate.opsForValue().get("fruit");
+    return stringRedisTemplate.opsForValue().get("fruit");
   }
 
 }
