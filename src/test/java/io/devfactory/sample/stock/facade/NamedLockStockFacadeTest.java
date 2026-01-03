@@ -24,13 +24,13 @@ class NamedLockStockFacadeTest {
   private StockRepository stockRepository;
 
   @BeforeEach
-  public void BeforeEach() {
+  void BeforeEach() {
     final var stock = new Stock(1L, 100L);
     stockRepository.save(stock);
   }
 
   @AfterEach
-  public void afterEach() {
+  void afterEach() {
     stockRepository.deleteAll();
   }
 
@@ -38,7 +38,7 @@ class NamedLockStockFacadeTest {
   @Test
   void stock_decrease_multiple_named_lock() throws Exception {
     int threadCount = 100;
-    
+
     CountDownLatch countDownLatch;
 
     try (var executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors())) {

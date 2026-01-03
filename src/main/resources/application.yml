@@ -28,8 +28,10 @@ spring:
 
   data:
     redis:
-      host: 192.168.0.103
-      port: 6379
+      host: 192.168.0.28
+      port: 16379
+      username: admin
+      password: dbgmltlr
       lettuce:
         pool:
           max-active: 10

@@ -1,7 +1,5 @@
 package io.devfactory.sample.book.cache;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.devfactory.config.RedisCacheKey;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,6 +7,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import tools.jackson.databind.ObjectMapper;
 
 import java.time.LocalDateTime;
 
@@ -37,7 +36,7 @@ public class CacheService {
     // 캐시 등록 및 수정 only
     // condition은 메서드를 호출하기 전에 평가
     @CachePut(value = RedisCacheKey.BOOK_CACHE, key = "#request.id", condition = "#request.name > '' && #request.address.length() > 10")
-    public String postCache(CacheRequest request) throws JsonProcessingException {
+    public String postCache(CacheRequest request) {
         return objectMapper.writeValueAsString(new CacheResponse(request.getId(), request.getName(), request.getAddress(), request.getDate()));
     }
 

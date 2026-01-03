@@ -46,7 +46,7 @@ class LockAdapterTest {
 
   @DisplayName("3명이 동시에 락을 선점하지만 1명만 락을 잡음")
   @Test
-  void testConcurrentAccess() throws InterruptedException {
+  void testConcurrentAccess() {
     final var hotelId = 9999999L;
     lockAdapter.clearLock(hotelId);
 

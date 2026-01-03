@@ -12,6 +12,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Consumer;
 
 @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
@@ -71,7 +72,7 @@ class LeaderboardServiceTest {
 
   void insertDummyData(Consumer<Leaderboard> consumer) {
     for (int i = 0; i < MAX_COUNT; i += 1) {
-      int score = (int) (Math.random() * MAX_COUNT); // 0 ~ 999999
+      int score = ThreadLocalRandom.current().nextInt(MAX_COUNT); // 0 ~ 999999
       consumer.accept(new Leaderboard("user-" + i, score));
     }
   }

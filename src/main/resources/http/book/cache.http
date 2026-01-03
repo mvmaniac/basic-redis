@@ -1,5 +1,5 @@
 ### 캐시 조회 (String)
-GET http://localhost:8080/book/cache/20/string
+GET http://localhost:8080/book/cache/20
 Content-Type: application/json
 
 ### 캐시 조회 (JSON)
@@ -62,7 +62,7 @@ Content-Type: application/json
 }
 
 ### 캐시 삭제
-DELETE http://localhost:8080/book/cache/20
+DELETE http://localhost:8080/book/cache/20/string
 Content-Type: application/json
 
 ### 캐시 조회 및 등록 (최초 등록 후 캐시 조회)

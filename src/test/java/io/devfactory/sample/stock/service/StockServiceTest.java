@@ -24,13 +24,13 @@ class StockServiceTest {
   private StockRepository stockRepository;
 
   @BeforeEach
-  public void BeforeEach() {
+  void BeforeEach() {
     final var stock = new Stock(1L, 100L);
     stockRepository.save(stock);
   }
 
   @AfterEach
-  public void afterEach() {
+  void afterEach() {
     stockRepository.deleteAll();
   }
 

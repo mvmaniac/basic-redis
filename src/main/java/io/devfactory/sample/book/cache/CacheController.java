@@ -1,10 +1,9 @@
 package io.devfactory.sample.book.cache;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tools.jackson.databind.ObjectMapper;
 
 @RequiredArgsConstructor
 @RequestMapping("/book/cache")
@@ -16,7 +15,7 @@ public class CacheController {
 
   @GetMapping("/{id}")
   public ResponseEntity<CacheResponse> getCacheById(
-      @PathVariable Long id) throws JsonProcessingException {
+      @PathVariable Long id) {
     String jsonStr = cacheService.getCacheById(id);
     return ResponseEntity.ok(getCacheResponseResponse(jsonStr));
   }
@@ -29,7 +28,7 @@ public class CacheController {
 
   @PostMapping("/string")
   public ResponseEntity<CacheResponse> postCache(
-      @RequestBody CacheRequest cacheRequest) throws JsonProcessingException {
+      @RequestBody CacheRequest cacheRequest) {
     String jsonStr = cacheService.postCache(cacheRequest);
     return ResponseEntity.ok(getCacheResponseResponse(jsonStr));
   }
@@ -50,7 +49,7 @@ public class CacheController {
     return ResponseEntity.ok(cacheService.getAndPostCache(request));
   }
 
-  private CacheResponse getCacheResponseResponse(String jsonStr) throws JsonProcessingException {
+  private CacheResponse getCacheResponseResponse(String jsonStr) {
     if (null == jsonStr) {
       return new CacheResponse();
     }

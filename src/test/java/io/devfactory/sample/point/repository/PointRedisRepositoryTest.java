@@ -35,7 +35,7 @@ class PointRedisRepositoryTest {
   @Test
   void 직접_등록_및_조회를_할_수_있다() {
     String key = "random";
-    String value = RandomStringUtils.randomAlphabetic(5, 10);
+    String value = RandomStringUtils.secure().nextAlphabetic(5, 10);
 
     ValueOperations<String, String> vop = redisTemplate.opsForValue();
     vop.set(key, value);
