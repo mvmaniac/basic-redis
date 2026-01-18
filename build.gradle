@@ -1,5 +1,5 @@
 plugins {
-  id 'org.springframework.boot' version '3.4.4'
+  id 'org.springframework.boot' version '4.0.2'
   id 'io.spring.dependency-management' version '1.1.7'
   id 'java'
 }
@@ -9,7 +9,7 @@ version = '0.0.1-SNAPSHOT'
 
 java {
   toolchain {
-    languageVersion = JavaLanguageVersion.of(21)
+    languageVersion = JavaLanguageVersion.of(25)
   }
 }
 
@@ -17,6 +17,7 @@ configurations {
   compileOnly {
     extendsFrom annotationProcessor
   }
+  mockitoAgent
 }
 
 repositories {
@@ -24,16 +25,17 @@ repositories {
 }
 
 dependencies {
+  implementation 'org.springframework.boot:spring-boot-starter-webmvc'
   implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
   implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-  implementation 'org.springframework.boot:spring-boot-starter-web'
   implementation 'org.springframework.session:spring-session-data-redis'
 
-  implementation 'org.apache.commons:commons-lang3:3.15.0'
-  implementation 'org.redisson:redisson-spring-boot-starter:3.26.0'
+  implementation 'org.apache.commons:commons-lang3'
+  implementation 'org.redisson:redisson-spring-boot-starter:4.1.0'
 
   runtimeOnly 'com.mysql:mysql-connector-j'
 
+  annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
   developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
   compileOnly 'org.projectlombok:lombok'
@@ -41,15 +43,24 @@ dependencies {
   testCompileOnly 'org.projectlombok:lombok'
   testAnnotationProcessor 'org.projectlombok:lombok'
 
-  testImplementation 'org.springframework.boot:spring-boot-starter-test'
+  testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
+  testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa-test'
+  testImplementation 'org.springframework.boot:spring-boot-starter-data-redis-test'
+  testImplementation 'org.springframework.boot:spring-boot-starter-session-data-redis-test'
   testImplementation 'com.h2database:h2'
-  testImplementation 'org.awaitility:awaitility:4.2.0'
+  testImplementation 'org.awaitility:awaitility:4.3.0'
 
   testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+  mockitoAgent('org.mockito:mockito-core') { transitive = false }
 }
 
 tasks.named('test') {
   useJUnitPlatform()
+
+  if (configurations.hasProperty('mockitoAgent')) {
+    jvmArgs "-javaagent:${configurations.mockitoAgent.asPath}"
+  }
 }
 
 tasks.named('compileJava') {
